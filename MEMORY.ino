@@ -105,19 +105,19 @@ void fadeLED(int ledPin, int startBrightness, int endBrightness, int duration) {
 
 void displaySequence(bool hard) {
   int leds[] = {blueLED, yellowLED, redLED, greenLED};
-  int brightness = hard ? max(255 - 30 * currentLevel, 0) : 255; // Adjust brightness for hard mode
+  int brightness = hard ? max(255 - 30 * currentLevel, 0) : 255;
   unsigned long currentMillis = millis();
   
   int basePauseDuration = 600;
   int minPauseDuration = 400;
   int pauseDuration = hard ? max(basePauseDuration - 20 * currentLevel, minPauseDuration) : basePauseDuration;
 
-  if (displayState == 0 && currentMillis - lastMillis >= pauseDuration) { // Pause between elements
+  if (displayState == 0 && currentMillis - lastMillis >= pauseDuration) {
     lastMillis = currentMillis;
     fadeLED(leds[sequence[sequenceIndex]], 0, brightness, 300); // Fade in LED
     tone(buzzerPin, 1000 + (leds[sequence[sequenceIndex]] * 200), 300); // Play tone
     displayState = 1;
-  } else if (displayState == 1 && currentMillis - lastMillis >= 300) { // Display each element
+  } else if (displayState == 1 && currentMillis - lastMillis >= 300) {
     lastMillis = currentMillis;
     fadeLED(leds[sequence[sequenceIndex]], brightness, 0, 300); // Fade out LED
     sequenceIndex++;
@@ -250,7 +250,7 @@ void loop() {
         lcd.print(buttonPressIndex);
         int buttonPressed = checkButtonPress();
         if (buttonPressed != -1) {
-          int expectedButton = 2 * (sequence[buttonPressIndex] + 1) + 1; // Convert sequence index to button pin
+          int expectedButton = 2 * (sequence[buttonPressIndex] + 1) + 1;
           if (buttonPressed != expectedButton) {
             gameState = GAME_OVER;
             gameOverMillis = millis();
