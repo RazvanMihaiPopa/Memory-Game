@@ -115,7 +115,7 @@ void displaySequence(bool hard) {
   if (displayState == 0 && currentMillis - lastMillis >= pauseDuration) {
     lastMillis = currentMillis;
     fadeLED(leds[sequence[sequenceIndex]], 0, brightness, 300); // Fade in LED
-    tone(buzzerPin, 1000 + (leds[sequence[sequenceIndex]] * 200), 300); // Play tone
+    tone(buzzerPin, 1000 + (leds[sequence[sequenceIndex]] * 200), 300);
     displayState = 1;
   } else if (displayState == 1 && currentMillis - lastMillis >= 300) {
     lastMillis = currentMillis;
@@ -182,8 +182,8 @@ void gameOver() {
   } else if (gameOverPhase == 2 && currentMillis - gameOverMillis >= 300) {
     gameOverPhase = 0;
     gameState = WAIT_FOR_START;
-    hardMode = false; // Reset hard mode
-    digitalWrite(modeLED, LOW); // Turn off mode LED
+    hardMode = false;
+    digitalWrite(modeLED, LOW);
     lcd.clear();
     lcd.setCursor(0, 0);
     lcd.print("Memory Game!");
@@ -198,7 +198,7 @@ void levelUp() {
   lcd.clear();
   lcd.setCursor(0, 0);
   lcd.print("Level ");
-  lcd.print(currentLevel + 1); // Show the next level number
+  lcd.print(currentLevel + 1);
   levelUpMillis = millis();
   waitForNext = true;
 }
